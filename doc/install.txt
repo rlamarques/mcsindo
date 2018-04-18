@@ -1,0 +1,17 @@
+------------ AMBIENTE -----------------------
+1-> Instalar Node e NPM ( Node Package Manager)
+2-> Ter um banco mongodb no path indicado no aquivo app.js ( raiz do projeto)
+
+----------- SETUP PROJETO -----------------
+3-> Execute "npm install" em qualquer nivel do projeto para baixar as dependencias
+
+
+------------ EXECUTANDO --------------------
+4-> node app.js (raiz do projeto)
+
+
+------------ SERVIÇO ---------------------
+5-> Atualment só tem o de pegar alguns comentarios para um dado ID .
+
+Requisição http get para http://localhost:3000/youtube/fetchcomments/video/ID_DO_VIDEO
+( trocando o final por um id valido de video de youtube, exemplo -w2m-TeLi6I)

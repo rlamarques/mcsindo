@@ -1,5 +1,5 @@
 const {YB_API_KEY} = require('../params.js');
-
+const videoService = require('./videoService')
 const request = require("superagent");
 
 const fetchCommentsFromVideo = (videoId, callback) => {
@@ -12,7 +12,17 @@ const fetchCommentsFromVideo = (videoId, callback) => {
     fetchYoutubeList({url, query, maxSize : 20},
       (list) =>
        {
-
+         if (list != null) {
+           videoService.create({
+             id : videoId,
+             topLevelComments : list
+           }, callback)
+         } else {
+           if (callback) {
+            callback({errorMessage : "Erro ao obter comentários"})
+           }
+           console.log("Error fetching comments for video " + videoId);
+         }
        }
     );
 
@@ -29,7 +39,7 @@ const fetchYoutubeList = (params, callback, recursionParams) => {
      (error, success) => {
        if (error || !success.body.nextPageToken) {
          if (error) {
-           console.log(error);
+           callback(null)
          } else {
            const body = success.body;
            const items = body.items

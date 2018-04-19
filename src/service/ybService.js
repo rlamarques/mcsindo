@@ -28,6 +28,31 @@ const fetchCommentsFromVideo = (videoId, callback) => {
 
 }
 
+const fetchRepliesFromComment = (commentId, callback) => {
+  const url = 'https://www.googleapis.com/youtube/v3/comment';
+  const query = {
+    'key' : YB_API_KEY,
+    'parentId': commentId,
+    'part': 'snippet',
+  };
+
+  return new Promise((resolve, reject) => {
+
+    fetchYoutubeList({url, query, maxSize : 20},
+      (list, err) => {
+        if (err) {
+          console.log("Error fetching replies");
+          console.log(err);
+          reject();
+        } else {
+          console.log("List replies");
+          console.log(list);
+          resolve(list)
+        }
+      });
+  })
+}
+
 const fetchYoutubeList = (params, callback, recursionParams) => {
 
   var {url, query, maxSize} = params;

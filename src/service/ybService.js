@@ -13,6 +13,7 @@ const fetchCommentsFromVideo = (videoId, callback) => {
       (list) =>
        {
          if (list != null) {
+
            videoService.create({
              id : videoId,
              topLevelComments : list
@@ -28,7 +29,7 @@ const fetchCommentsFromVideo = (videoId, callback) => {
 
 }
 
-const fetchRepliesFromComment = (commentId, callback) => {
+const fetchRepliesFromComment = (commentId) => {
   const url = 'https://www.googleapis.com/youtube/v3/comment';
   const query = {
     'key' : YB_API_KEY,

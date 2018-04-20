@@ -1,7 +1,6 @@
 const Video = require('../model/Video')
 
 const create = (videoDic, callback) => {
-
   var video = {};
   video["_id"] = videoDic.id;
   var comments = [];
@@ -17,7 +16,8 @@ const create = (videoDic, callback) => {
     comments.push({
       _id : topLevelComment.id,
       author : author,
-      text : topLevelComment.snippet.textDisplay
+      text : topLevelComment.snippet.textDisplay,
+      likeCount : topLevelComment.snippet.likeCount
     })
   }
 

@@ -5,7 +5,8 @@ var CommentSchema = mongoose.Schema({
   _id : String,
   author : Author.schema,
   text : String,
-  replies : []
+  replies : [],
+  likeCount : Number
 },  { _id: false })
 
 const Comment = mongoose.model('Comment', CommentSchema);

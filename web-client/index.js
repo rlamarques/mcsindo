@@ -111,15 +111,17 @@ for (var i = 0; i < languages.length; i++) {
 }
 
 //Detecting UI language
-var localeCode;
+// var localeCode;
+//
+// if (navigator.languages && navigator.languages[0]){
+//   localeCode = navigator.languages[0];
+// } else if (navigator.languages) {
+//   localeCode = navigator.languages;
+// } else if (navigator.userLanguage) {
+//   localeCode = navigator.userLanguage
+// }
 
-if (navigator.languages && navigator.languages[0]){
-  localeCode = navigator.languages[0];
-} else if (navigator.languages) {
-  localeCode = navigator.languages;
-} else if (navigator.userLanguage) {
-  localeCode = navigator.userLanguage
-}
+var localeCode = "en-US"
 
 console.log("test");
 

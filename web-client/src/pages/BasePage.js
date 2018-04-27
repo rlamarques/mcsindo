@@ -12,12 +12,12 @@ class BasePage extends Component {
   render() {
     return (
       <div className="base-page">
-        <Header/>
         <div className="base-page-content">
           <SideMenu/>
-          {this.props.children}
+          <div className="base-page-content-right" style={{marginLeft : "185px", padding: "17px"}}>
+            {this.props.children}
+          </div>
         </div>
-        <Footer/>
       </div>
     )
   }

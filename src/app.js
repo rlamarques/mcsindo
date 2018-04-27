@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/mcsindo');
 
 const startExpressApp = () => {
+  app.disable('etag');
   app.use("/", require('./controller/index'));
   app.listen(3000, () => {
     console.log("App listening on port 3000");

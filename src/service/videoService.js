@@ -22,7 +22,7 @@ const create = (videoDic, callback) => {
     comments.push({
       _id : topLevelComment.id,
       author : author,
-      text : topLevelComment.snippet.textDisplay,
+      text : topLevelComment.snippet.textOriginal ,
       likeCount : topLevelComment.snippet.likeCount
     })
   }

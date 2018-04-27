@@ -12,6 +12,12 @@ class SideMenu extends Component {
             Comments
           </div>
         </div>
+        <div className="side-menu-item">
+          <i className="fas fa-video fa-2x"/>
+          <div className="section-title">
+            Add video
+          </div>
+        </div>
       </div>
     )
   }

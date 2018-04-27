@@ -9,8 +9,9 @@ router.get('/fetchComments/video/:videoId', (req, res) => {
   if (!videoId) {
     res.send("missing video id")
   }
+
+  res.send(req.params)
   ybService.fetchCommentsFromVideo(videoId, {maxSize, minSize}, () => {
-    res.send(req.params)
   });
 })
 

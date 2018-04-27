@@ -5,7 +5,6 @@ var CommentSchema = mongoose.Schema({
   _id : String,
   author : Author.schema,
   text : String,
-  replies : [],
   likeCount : Number
 },  { _id: false })
 

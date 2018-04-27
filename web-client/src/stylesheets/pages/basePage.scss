@@ -1,0 +1,10 @@
+.base-page {
+  background-color: yellow;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
+  .base-page-content {
+    background-color: pink;
+    flex: 1;
+  }
+}

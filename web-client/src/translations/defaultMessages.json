@@ -1,0 +1,17 @@
+[
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "bla ble blu",
+        "description": "Placeholder on main searchbar",
+        "id": "SearchBar.placeholder"
+      },
+      {
+        "defaultMessage": "bla ble blu",
+        "description": "Placeholder ondsds main searchbar",
+        "id": "SearchBar.novoCampo"
+      }
+    ],
+    "path": "src/components/utils/searchBar.json"
+  }
+]

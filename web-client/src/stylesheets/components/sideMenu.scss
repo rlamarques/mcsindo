@@ -1,0 +1,23 @@
+.side-menu {
+  float: left;
+  background-color: aliceblue;
+  padding: 25px;
+
+  .side-menu-item {
+    border-color: gray;
+    border-width: 3px;
+    border-style: solid;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+
+    i {
+      margin: auto;
+    }
+
+    .section-title {
+      margin-top : 5px;
+    }
+  }
+}

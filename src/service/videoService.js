@@ -1,8 +1,14 @@
 const Video = require('../model/Video')
 
 const create = (videoDic, callback) => {
+
+  if (!callback) {
+    callback = () => {}
+  }
+
   var video = {};
   video["_id"] = videoDic.id;
+  video.status = videoDic.status;
   var comments = [];
   video.topLevelComment =comments
   for (var index in videoDic.topLevelComments) {
@@ -26,11 +32,25 @@ const create = (videoDic, callback) => {
     if (err) {
       console.log("Erro ao salvar o video")
       console.log(err);
+      callback(null, err)
     }
     callback(null, err)
   });
 }
 
+const fetchComments = (callback) => {
+  Video.find({}).select({topLevelComment : 1}).exec(
+    (err, videos) => {
+      var allComments = [];
+      for (var videoIndex in videos) {
+        var topLevelComments = videos[videoIndex].topLevelComment;
+        allComments = allComments.concat(topLevelComments);
+      }
+      callback(allComments);
+  })
+}
+
 module.exports = {
   create,
+  fetchComments
 }

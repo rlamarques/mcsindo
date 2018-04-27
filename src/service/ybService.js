@@ -2,61 +2,67 @@ const {YB_API_KEY} = require('../params.js');
 const videoService = require('./videoService')
 const request = require("superagent");
 
-const fetchCommentsFromVideo = (videoId, callback) => {
+const fetchCommentsFromVideo = (videoId, params, callback) => {
     const url = 'https://www.googleapis.com/youtube/v3/commentThreads';
     const query = {
       'key' : YB_API_KEY,
       'videoId': videoId,
       'part': 'snippet',
     };
-    fetchYoutubeList({url, query, maxSize : 20},
+
+    videoService.create({
+      id : videoId,
+      status : "LOADING",
+      topLevelComment : []
+    }, callback)
+
+    const {minSize, maxSize} = params;
+
+    fetchYoutubeList({url, query, maxSize : maxSize , minSize},
       (list) =>
        {
          if (list != null) {
-
            videoService.create({
              id : videoId,
+             status : "COMPLETED",
              topLevelComments : list
-           }, callback)
+           })
          } else {
-           if (callback) {
-            callback({errorMessage : "Erro ao obter comentários"})
-           }
            console.log("Error fetching comments for video " + videoId);
          }
        }
     );
 
 }
-
-const fetchRepliesFromComment = (commentId) => {
-  const url = 'https://www.googleapis.com/youtube/v3/comment';
-  const query = {
-    'key' : YB_API_KEY,
-    'parentId': commentId,
-    'part': 'snippet',
-  };
-
-  return new Promise((resolve, reject) => {
-
-    fetchYoutubeList({url, query, maxSize : 20},
-      (list, err) => {
-        if (err) {
-          console.log("Error fetching replies");
-          console.log(err);
-          reject();
-        } else {
-          console.log("List replies");
-          console.log(list);
-          resolve(list)
-        }
-      });
-  })
-}
+//
+// const fetchRepliesFromComment = (commentId) => {
+//   const url = 'https://www.googleapis.com/youtube/v3/comment';
+//   const query = {
+//     'key' : YB_API_KEY,
+//     'parentId': commentId,
+//     'part': 'snippet',
+//   };
+//
+//   return new Promise((resolve, reject) => {
+//
+//     fetchYoutubeList({url, query, maxSize : 20},
+//       (list, err) => {
+//         if (err) {
+//           console.log("Error fetching replies");
+//           console.log(err);
+//           reject();
+//         } else {
+//           console.log("List replies");
+//           console.log(list);
+//           resolve(list)
+//         }
+//       });
+//   })
+// }
 
 const fetchYoutubeList = (params, callback, recursionParams) => {
 
-  var {url, query, maxSize} = params;
+  var {url, query, maxSize} = params
 
   var list = [];
 
@@ -78,10 +84,10 @@ const fetchYoutubeList = (params, callback, recursionParams) => {
          list = list.concat(items);
 
          const nextPageToken = body.nextPageToken;
-         if (maxSize && list.length >= params.maxSize) {
+         if (maxSize && list.length >= maxSize) {
            callback(list)
          } else {
-           rQuery["nextPageToken"] = nextPageToken
+           rQuery["pageToken"] = nextPageToken
            pagePromise(rUrl, rQuery)
          }
        }

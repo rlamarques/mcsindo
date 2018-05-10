@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
 import CommentPreview from './CommentPreview'
+import Loading from '../loading/Loading'
 
 class Comments extends Component {
 
@@ -9,6 +10,7 @@ class Comments extends Component {
     super(props)
 
     this.state = {
+      loading: false,
       comments : []
     }
 
@@ -17,11 +19,15 @@ class Comments extends Component {
 
   fetchComments () {
     var that = this;
+    this.setState({
+      loading : true
+    })
     $.ajax({
       url: API_URL + "db/comments",
     }).then(
       (data, textStatus, jqXHR) => {
         that.setState({
+          loading : false,
           comments : JSON.parse(data)
         })
     })
@@ -32,9 +38,12 @@ class Comments extends Component {
   }
 
   render () {
-    const {comments} = this.state;
+    const {comments, loading} = this.state;
     return (
       <div className="comments">
+        {loading &&
+          <Loading/>
+        }
         {comments &&
           comments.map(
             (v, i) => {

@@ -25,33 +25,7 @@ const fetchCommentsFromVideo = (videoId, params, callback) => {
          }
        }
     );
-
 }
-//
-// const fetchRepliesFromComment = (commentId) => {
-//   const url = 'https://www.googleapis.com/youtube/v3/comment';
-//   const query = {
-//     'key' : YB_API_KEY,
-//     'parentId': commentId,
-//     'part': 'snippet',
-//   };
-//
-//   return new Promise((resolve, reject) => {
-//
-//     fetchYoutubeList({url, query, maxSize : 20},
-//       (list, err) => {
-//         if (err) {
-//           console.log("Error fetching replies");
-//           console.log(err);
-//           reject();
-//         } else {
-//           console.log("List replies");
-//           console.log(list);
-//           resolve(list)
-//         }
-//       });
-//   })
-// }
 
 const fetchRepliesFromComment = (commentId) => {
   const url = 'https://www.googleapis.com/youtube/v3/comment';
@@ -66,12 +40,8 @@ const fetchRepliesFromComment = (commentId) => {
     fetchYoutubeList({url, query, maxSize : 25},
       (list, err) => {
         if (err) {
-          console.log("Error fetching replies");
-          console.log(err);
           reject();
         } else {
-          console.log("List replies");
-          console.log(list);
           resolve(list)
         }
       });
@@ -104,8 +74,6 @@ const fetchYoutubeList = (params, callback, recursionParams) => {
          const nextPageToken = body.nextPageToken;
          if (maxSize && list.length >= maxSize) {
            callback(list)
-           console.log("wtffff");
-           console.log(params);
          } else {
            rQuery["pageToken"] = nextPageToken
            pagePromise(rUrl, rQuery)

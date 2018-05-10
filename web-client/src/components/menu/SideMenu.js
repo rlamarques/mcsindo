@@ -18,12 +18,26 @@ class SideMenu extends Component {
             </div>
           </div>
         </Link>
-        {/*<div className="side-menu-item">
-          <i className="fas fa-video fa-2x"/>
-          <div className="section-title">
-            Add video
+        <Link to="addVideo" style={{
+          color: "#444444",
+        }}>
+          <div className="side-menu-item">
+            <i className="fas fa-plus fa-2x"/>
+            <div className="section-title">
+              Add video
+            </div>
           </div>
-        </div> */}
+        </Link>
+        <Link to="videos" style={{
+          color: "#444444",
+        }}>
+          <div className="side-menu-item">
+            <i className="fas fa-video fa-2x"/>
+            <div className="section-title">
+              videos
+            </div>
+          </div>
+        </Link>
       </div>
     )
   }

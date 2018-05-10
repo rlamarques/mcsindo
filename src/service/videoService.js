@@ -50,7 +50,15 @@ const fetchComments = (callback) => {
   })
 }
 
+const fetchVideos = (callback) => {
+  Video.find({}).select({}).exec(
+    (err, videos) => {
+      callback(videos);
+  })
+}
+
 module.exports = {
   create,
-  fetchComments
+  fetchComments,
+  fetchVideos
 }

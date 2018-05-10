@@ -10,4 +10,12 @@ router.get('/comments', (req, res) => {
   )
 })
 
+router.get('/videos', (req, res) => {
+  videoService.fetchVideos(
+    (allComments) => {
+      res.send(JSON.stringify(allComments));
+    }
+  )
+})
+
 module.exports = router;

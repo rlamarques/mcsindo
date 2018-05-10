@@ -1,7 +1,10 @@
 const controllers =  require('./controller/index');
 const express = require('express');
+var cors = require('cors')
+
 const app = express();
 
+app.use(cors())
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/mcsindo');
 
